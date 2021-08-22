@@ -8,12 +8,14 @@ const getRandomNews = function (
   Ids: number[],
   numberOfstories: number
 ): number[] {
-  const RandomIds = [];
+  const RandomIds = [] as number[];
+  const RandomStories = [];
   while (RandomIds.length < numberOfstories) {
     let randomIndex = Math.floor(Math.random() * Ids.length) + 1;
     if (RandomIds.indexOf(randomIndex) === -1) RandomIds.push(randomIndex);
+    RandomStories.push(Ids[randomIndex]);
   }
-  return RandomIds;
+  return RandomStories;
 };
 
 export default function Stories({
@@ -65,6 +67,7 @@ export default function Stories({
 export async function getStaticProps() {
   const res = await fetch(GetNewsUrl);
   const data = await res.json();
+
   return {
     props: {
       newsIDs: data,
