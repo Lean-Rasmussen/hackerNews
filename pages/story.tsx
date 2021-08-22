@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "../styles/story.module.scss";
 export default function Story(): JSX.Element {
+  const storyUrl = "https://hacker-news.firebaseio.com/v0/item/${id}.json";
+  const getUserUrl = "https://hacker-news.firebaseio.com/v0/user/${id}.json";
   return (
     <div className={styles.container}>
-      this is the story you are looking for
       <h3>story.title</h3>
       <a href="story.URL"></a>
       <p>story.timestamp</p>
