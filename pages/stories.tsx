@@ -42,8 +42,8 @@ export default function Stories({
         return Promise.all(results.map((r) => r.json()));
       })
       .then((values) => {
-        console.log(values);
-        setDisplayStories(values);
+        let sorttedStories = values.sort((a, b) => a.score - b.score);
+        setDisplayStories(sorttedStories);
       });
   };
 
@@ -52,8 +52,6 @@ export default function Stories({
   }, [randomIds]);
   return (
     <div>
-      <h1>Hacker News</h1>
-      <p>Your number 2 place for all things hacked</p>
       <button onClick={() => newRandomIDs()}>Get new Hacks</button>
       {displayStories
         ? displayStories.map((news) => {

@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 import { Istory } from "../interfaces/Istories";
 import styles from "../styles/storyComponent.module.scss";
 export default function StoryComponent({
@@ -9,7 +9,10 @@ export default function StoryComponent({
 }): JSX.Element {
   return (
     <div className={styles.container}>
-      <h3>{news.title ? news.title : "Unnamed Story"}</h3>
+      <Link href="/story" passHref={true}>
+        <h3>{news.title ? news.title : "Unnamed Story"}</h3>
+      </Link>
+
       <p>
         {news.url ? (
           <a target={`_blank`} href={news.url}>
@@ -20,10 +23,9 @@ export default function StoryComponent({
         )}
       </p>
       <p>{news.score ? `News Score : ${news.score}` : "not rated"}</p>
-      <p>{`News id : ${news.id}`}</p>
       <p>
         {news.time
-          ? `created at : ${new Date(1172101602)}`
+          ? `created at : ${new Date(news.time * 1000)}`
           : "No time registered"}
       </p>
     </div>
