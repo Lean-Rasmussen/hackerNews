@@ -3,6 +3,7 @@ const GetNewsUrl = "https://hacker-news.firebaseio.com/v0/topstories.json";
 
 import { Istory } from "../interfaces/Istories";
 import StoryComponent from "../components/StoryComponent";
+import styles from "../styles/stories.module.scss";
 
 const getRandomNews = function (
   Ids: number[],
@@ -51,13 +52,22 @@ export default function Stories({
     getStories(randomIds);
   }, [randomIds]);
   return (
-    <div>
-      <button onClick={() => newRandomIDs()}>Get new Hacks</button>
-      {displayStories
-        ? displayStories.map((news) => {
+    <div className={styles.container}>
+      <div className={styles.container__header}>
+        <h2>10 Random Hacker News</h2>
+        <div className={styles.container__header__button}>
+          <a onClick={() => newRandomIDs()}>Randomize</a>
+        </div>
+      </div>
+      <div className={styles.container__stories}>
+        {displayStories ? (
+          displayStories.map((news) => {
             return <StoryComponent key={news.id} news={news} />;
           })
-        : null}
+        ) : (
+          <p>...loading</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -8,26 +8,19 @@ export default function StoryComponent({
   news: Istory;
 }): JSX.Element {
   return (
-    <div className={styles.container}>
+    <div className={styles.story}>
       <Link href="/story" passHref={true}>
-        <h3>{news.title ? news.title : "Unnamed Story"}</h3>
+        <h3 className={styles.story__headline}>{news.title}</h3>
       </Link>
 
-      <p>
-        {news.url ? (
-          <a target={`_blank`} href={news.url}>
-            read more
-          </a>
-        ) : (
-          "no link"
-        )}
-      </p>
-      <p>{news.score ? `News Score : ${news.score}` : "not rated"}</p>
-      <p>
-        {news.time
-          ? `created at : ${new Date(news.time * 1000)}`
-          : "No time registered"}
-      </p>
+      <p className={styles.story__score}>{`Score : ${news.score}`}</p>
+      <p className={styles.story__created}>{`created at : ${new Date(
+        news.time * 1000
+      )}`}</p>
+      <a className={styles.story__link} target={`_blank`} href={news.url}>
+        read more
+        <span className={styles.story__link__arrow}>&rarr;</span>
+      </a>
     </div>
   );
 }
