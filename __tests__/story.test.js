@@ -1,5 +1,5 @@
 import React from 'react'
-import {render, fireEvent, waitFor, screen} from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
 import Story from "../pages/story"
 
 it("renders without issue",()=>{

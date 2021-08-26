@@ -9,3 +9,9 @@ export interface Istory {
     type: string;
     url: string;
   }
+  export interface Iuser{
+    karma: number,
+    id:string,
+    created: number,
+    submitted: number[]
+  }

@@ -9,16 +9,14 @@ export default function StoryComponent({
 }): JSX.Element {
   return (
     <div className={styles.story}>
-      <Link href="/story" passHref={true}>
-        <h3 className={styles.story__headline}>{news.title}</h3>
+      <h3 className={styles.story__headline}>{news.title}</h3>
+      <Link href={`/stories/${news.id}`} passHref={true}>
+        <p>Author : {news.by}</p>
       </Link>
 
       <p className={styles.story__score}>{`Score : ${news.score}`}</p>
-      <p className={styles.story__created}>{`created at : ${new Date(
-        news.time * 1000
-      )}`}</p>
       <a className={styles.story__link} target={`_blank`} href={news.url}>
-        read more
+        Open article
         <span className={styles.story__link__arrow}>&rarr;</span>
       </a>
     </div>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 const GetNewsUrl = "https://hacker-news.firebaseio.com/v0/topstories.json";
 
-import { Istory } from "../interfaces/Istories";
-import StoryComponent from "../components/StoryComponent";
-import styles from "../styles/stories.module.scss";
+import { Istory } from "../../interfaces/Istories";
+import StoryComponent from "../../components/StoryComponent";
+import styles from "../../styles/stories.module.scss";
 
 const getRandomNews = function (
   Ids: number[],

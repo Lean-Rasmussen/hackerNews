@@ -19,7 +19,7 @@ export default function Layout({
           <Link href="/" passHref={true}>
             <p className={styles.navigation__element}>Home</p>
           </Link>
-          <Link href="./stories" passHref={true}>
+          <Link href="/stories" passHref={true}>
             <p className={styles.navigation__element}>Stories</p>
           </Link>
         </nav>

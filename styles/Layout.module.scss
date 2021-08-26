@@ -27,6 +27,7 @@ text-align: center;
         margin-right: 2rem;
         display: inline-block;
         position: relative;
+        cursor: pointer;
         &:after{
             content: "";
             position: absolute;
