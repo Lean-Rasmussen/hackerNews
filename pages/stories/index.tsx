@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 const GetNewsUrl = "https://hacker-news.firebaseio.com/v0/topstories.json";
 
 import { Istory } from "../../interfaces/Istories";
@@ -9,13 +9,18 @@ const getRandomNews = function (
   Ids: number[],
   numberOfstories: number
 ): number[] {
-  const RandomIds = [] as number[];
+  const storyIndexes: number[] = [];
   const RandomStories = [];
-  while (RandomIds.length < numberOfstories) {
+  while (
+    storyIndexes.length < numberOfstories &&
+    Ids.length > numberOfstories
+  ) {
     let randomIndex = Math.floor(Math.random() * Ids.length) + 1;
-    if (RandomIds.indexOf(randomIndex) === -1) RandomIds.push(randomIndex);
+    if (storyIndexes.indexOf(randomIndex) === -1)
+      storyIndexes.push(randomIndex);
     RandomStories.push(Ids[randomIndex]);
   }
+  console.log(RandomStories);
   return RandomStories;
 };
 
@@ -24,15 +29,15 @@ export default function Stories({
 }: {
   newsIDs: number[];
 }): JSX.Element {
-  const numberOfStories = 10;
-  const [randomIds, setRandomIds] = useState(
-    getRandomNews(newsIDs, numberOfStories)
-  );
+  const numberOfStories = useMemo(() => {
+    return 10;
+  }, []);
+  let [randomIds, setRandomIds] = useState([] as number[]);
   const [displayStories, setDisplayStories] = useState<Istory[]>([]);
 
-  const newRandomIDs = function () {
+  const newRandomIDs = useCallback((newsIDs, numberOfStories) => {
     setRandomIds(getRandomNews(newsIDs, numberOfStories));
-  };
+  }, []);
 
   const getStories = function (randomIds: number[]): any {
     const arrOfPromises = randomIds.map((id) =>
@@ -47,16 +52,22 @@ export default function Stories({
         setDisplayStories(sorttedStories);
       });
   };
+  useEffect(() => {
+    newRandomIDs(newsIDs, numberOfStories);
+  }, [newRandomIDs, newsIDs, numberOfStories]);
 
   useEffect(() => {
     getStories(randomIds);
   }, [randomIds]);
+
   return (
     <div className={styles.container}>
       <div className={styles.container__header}>
         <h2>10 Random Hacker News</h2>
         <div className={styles.container__header__button}>
-          <a onClick={() => newRandomIDs()}>Randomize</a>
+          <a onClick={() => newRandomIDs(newsIDs, numberOfStories)}>
+            Randomize
+          </a>
         </div>
       </div>
       <div className={styles.container__stories}>

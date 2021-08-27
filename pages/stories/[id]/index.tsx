@@ -16,20 +16,27 @@ export default function Story({
   return (
     <div className={styles.container}>
       <section className={styles.userinfo}>
-        <h1>{story.by}</h1>
-        <p>Karma score : {author.karma}</p>
-        <Image
-          alt="profile image"
-          src={story.id % 2 === 0 ? jerry : musk}
-        ></Image>
+        <h1 className={styles.userinfo__name}>{story.by}</h1>
+        <p className={styles.userinfo__karma}>Karma score : {author.karma}</p>
+        <div className={styles.userinfo__picture}>
+          <Image
+            alt="profile image"
+            src={story.id % 2 === 0 ? jerry : musk}
+          ></Image>
+        </div>
       </section>
 
       <section className={styles.articleinfo}>
-        <h2>Article Info</h2>
-        <h3>{story.title}</h3>
-        <p>Story Score: {story.score}</p>
-        <p>{`created at : ${new Date(story.time * 1000)}`}</p>
-        <a href={story.url}>Read Article</a>
+        <h2 className={styles.articleinfo__headline}>Article Info</h2>
+        <h3 className={styles.articleinfo__title}>{story.title}</h3>
+        <p className={styles.articleinfo__timestamp}>{`created at : ${new Date(
+          story.time * 1000
+        )}`}</p>
+        <p className={styles.articleinfo__score}>Story Score: {story.score}</p>
+
+        <a className={styles.articleinfo__link} href={story.url}>
+          Read Article
+        </a>
       </section>
     </div>
   );
